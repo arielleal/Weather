@@ -19,10 +19,17 @@ class WeatherMapper {
         humidity = result.humidity,
         windSpeedy = result.windSpeedy,
         moonPhase = result.moonPhase,
-        forecastList =
+        forecastList = result.forecastList.map {
+            forecastListResponse -> forecastListResponse.toForecast()
+        }
     )
 
-    private fun forecastMap(forecast: ForecastResponse) = List<Forecast> (
-
+    private fun ForecastResponse.toForecast() = Forecast(
+        date = date,
+        weekday = weekday,
+        maxTemp = maxTemp,
+        minTemp = minTemp,
+        description = description,
+        condition = condition
     )
 }

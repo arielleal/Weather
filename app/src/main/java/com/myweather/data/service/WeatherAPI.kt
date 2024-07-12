@@ -10,10 +10,10 @@ private const val BASE_ENDPOINT = "https://api.hgbrasil.com/weather"
 
 interface WeatherAPI {
     @GET(BASE_ENDPOINT)
-    fun getWeather(
+    suspend fun getWeather(
         @Query("key") key: String,
         @Query("city_name") cityName: String,
         @Query("lat") latitude: String,
         @Query("lon") longitude: String
-    ): Flow<WeatherResponse>
+    ): WeatherResponse
 }
