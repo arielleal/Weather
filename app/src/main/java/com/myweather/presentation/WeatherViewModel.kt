@@ -12,6 +12,8 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
+private const val KEY = "12afaa95"
+
 class WeatherViewModel(
     private val useCase: WeatherUseCase
 ) : ViewModel() {
@@ -27,6 +29,15 @@ class WeatherViewModel(
                 .catch { handleError(it) }
                 .collect { handleSuccess(it) }
         }
+    }
+
+    fun handleGetWeather() {
+        getWeather(WeatherRequest(
+            key = KEY,
+            cityName = "Campinas",
+            latitude = null,
+            longitude = null
+        ))
     }
 
     private fun showLoading() = stateViewModel.postValue(State.Loading(visibility = true))

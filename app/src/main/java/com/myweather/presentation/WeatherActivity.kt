@@ -3,17 +3,21 @@ package com.myweather.presentation
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import com.myweather.R
 import com.myweather.core.State
+import com.myweather.databinding.WeatherMainActivityBinding
 import com.myweather.domain.model.Weather
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class WeatherActivity : AppCompatActivity() {
+class WeatherActivity : AppCompatActivity(R.layout.weather_main_activity) {
 
+    private val binding by lazy { WeatherMainActivityBinding.inflate(layoutInflater) }
     private val viewModel: WeatherViewModel by viewModel()
-    //private val binding: WeatherActivityBinding by viewBinding()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         stateListener()
+        viewModel.handleGetWeather()
     }
 
     private fun stateListener() {

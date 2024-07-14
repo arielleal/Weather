@@ -5,11 +5,8 @@ import kotlinx.coroutines.flow.Flow
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-private const val KEY = "12afaa95"
-private const val BASE_ENDPOINT = "https://api.hgbrasil.com/weather"
-
 interface WeatherAPI {
-    @GET(BASE_ENDPOINT)
+    @GET()
     suspend fun getWeather(
         @Query("key") key: String,
         @Query("city_name") cityName: String,
