@@ -14,9 +14,9 @@ class WeatherMapper {
     )
 
     private fun weatherResultsMap(result: ResultResponse) = Results(
-        temp = result.temp,
+        temp = result.temp.toString(),
         city = result.city,
-        humidity = result.humidity,
+        humidity = result.humidity.toString(),
         windSpeedy = result.windSpeedy,
         moonPhase = result.moonPhase,
         forecastList = result.forecastList.map {
@@ -27,8 +27,8 @@ class WeatherMapper {
     private fun ForecastResponse.toForecast() = Forecast(
         date = date,
         weekday = weekday,
-        maxTemp = maxTemp,
-        minTemp = minTemp,
+        maxTemp = maxTemp.toString(),
+        minTemp = minTemp.toString(),
         description = description,
         condition = condition
     )

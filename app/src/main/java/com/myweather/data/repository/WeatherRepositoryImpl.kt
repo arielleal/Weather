@@ -16,12 +16,6 @@ class WeatherRepositoryImpl(
     private val remoteDataSource: WeatherRemoteDataSource,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : WeatherRepository {
-    override fun getWeather(request: WeatherRequest): Flow<Weather> = flow {
-        try {
-            remoteDataSource.invoke(request).flowOn(dispatcher)
-        } catch (e: HttpException) {
-            throw RemoteException("Service currently unavailable")
-        }
-
-    }
+    override fun getWeather(request: WeatherRequest): Flow<Weather> =
+        remoteDataSource(request).flowOn(dispatcher)
 }

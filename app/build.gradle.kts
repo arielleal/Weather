@@ -68,6 +68,10 @@ dependencies {
     implementation(libs.androidx.recyclerview)
     implementation(libs.androidx.recyclerview)
 
+    //Moshi
+    implementation(libs.moshi.kotlin)
+    implementation(libs.converter.moshi)
+
     //di
     implementation(libs.koin.android)
     implementation(libs.koin.android.ext)
@@ -78,10 +82,15 @@ dependencies {
 
     //test
     testImplementation(libs.junit)
+    testImplementation(libs.testng)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+    testImplementation (libs.mockk)
+    testImplementation (libs.androidx.core.testing)
+    testImplementation (libs.kotlinx.coroutines.test)
+    testImplementation (libs.kotlinx.coroutines.core.jvm)
+
 
     //debug
     debugImplementation(libs.androidx.ui.tooling)

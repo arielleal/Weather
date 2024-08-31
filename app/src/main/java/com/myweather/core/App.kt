@@ -16,8 +16,8 @@ class App : Application() {
             androidContext(this@App)
         }
 
-        PresentationModule.loadModule()
         DataModule.loadModule()
         DomainModule.loadModule()
+        PresentationModule.loadModule()
     }
 }

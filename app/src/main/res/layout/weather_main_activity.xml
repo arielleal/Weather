@@ -2,13 +2,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
+    android:background="@color/white"
     android:layout_height="match_parent"
-    android:layout_width="match_parent">
+    android:layout_width="wrap_content">
 
     <ImageView
         android:id="@+id/weatherImage"
         android:layout_width="wrap_content"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:layout_margin="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -19,6 +20,7 @@
         style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:layout_marginTop="4dp"
         android:layout_marginStart="8dp"
         tools:text="Hortolandia"
@@ -32,6 +34,7 @@
         style="@style/TextAppearance.AppCompat.Body1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:layout_marginTop="4dp"
         android:layout_marginStart="8dp"
         tools:text="Temp 32"
@@ -44,6 +47,7 @@
         style="@style/TextAppearance.AppCompat.Body1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:layout_marginTop="4dp"
         android:layout_marginStart="8dp"
         tools:text="Max 35"
@@ -56,6 +60,7 @@
         style="@style/TextAppearance.AppCompat.Body1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:layout_marginTop="4dp"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="8dp"

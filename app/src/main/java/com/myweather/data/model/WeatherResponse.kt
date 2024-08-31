@@ -1,41 +1,42 @@
 package com.myweather.data.model
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class WeatherResponse(
-    @SerializedName("by")
+    @Json(name = "by")
     val type: String,
-    @SerializedName("results")
+    @Json(name = "results")
     val weatherResults: ResultResponse,
-
 )
 
 data class ResultResponse(
-    @SerializedName("temp")
-    val temp: String,
-    @SerializedName("city")
+    @Json(name = "temp")
+    val temp: Double,
+    @Json(name = "city")
     val city: String,
-    @SerializedName("humidity")
-    val humidity: String,
-    @SerializedName("wind_speedy")
+    @Json(name = "humidity")
+    val humidity: Double,
+    @Json(name = "wind_speedy")
     val windSpeedy: String,
-    @SerializedName("moon_phase")
+    @Json(name = "moon_phase")
     val moonPhase: String,
-    @SerializedName("forecast")
+    @Json(name = "forecast")
     val forecastList: List<ForecastResponse>
 )
 
 data class ForecastResponse(
-    @SerializedName("date")
+    @Json(name = "date")
     val date: String,
-    @SerializedName("weekday")
+    @Json(name = "weekday")
     val weekday: String,
-    @SerializedName("max")
-    val maxTemp: String,
-    @SerializedName("min")
-    val minTemp: String,
-    @SerializedName("description")
+    @Json(name = "max")
+    val maxTemp: Double,
+    @Json(name = "min")
+    val minTemp: Double,
+    @Json(name = "description")
     val description: String,
-    @SerializedName("condition")
+    @Json(name = "condition")
     val condition: String,
 )
