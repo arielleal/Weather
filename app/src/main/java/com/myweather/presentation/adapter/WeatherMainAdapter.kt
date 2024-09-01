@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.myweather.R
+import com.myweather.core.toTemperature
 import com.myweather.databinding.WeatherItemListBinding
 import com.myweather.domain.model.Forecast
 
@@ -32,9 +33,12 @@ class WeatherMainAdapter : ListAdapter<Forecast, WeatherMainAdapter.WeatherItemV
         }
 
         fun bind(item: Forecast) {
-            binding.weatherImage.setImageResource(R.drawable.clear_night)
-            binding.max.text = item.maxTemp
-            binding.min.text = item.minTemp
+            binding.weatherImage.setImageResource(item.condition)
+            binding.maxValue.text = item.maxTemp.toTemperature()
+            binding.minValue.text = item.minTemp.toTemperature()
+            binding.weekday.text = item.weekday
+            binding.date.text = item.date
+            binding.descriptionDay.text = item.description
         }
     }
 }

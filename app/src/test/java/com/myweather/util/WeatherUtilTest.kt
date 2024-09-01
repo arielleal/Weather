@@ -6,11 +6,13 @@ import com.myweather.domain.model.Weather
 fun weatherResponseStub() = Weather(
     type = "",
     weatherResults = Results(
-        temp = "",
+        temp = 0.0,
+        description = "",
         city = "",
         humidity = "",
         windSpeedy = "",
-        moonPhase = "",
+        conditionSlug = 0,
+        time = "",
         forecastList = listOf()
     )
 )

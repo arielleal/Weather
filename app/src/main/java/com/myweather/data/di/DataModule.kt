@@ -1,5 +1,7 @@
 package com.myweather.data.di
 
+import com.myweather.core.ResourceProvider
+import com.myweather.core.ResourceProviderImpl
 import com.myweather.data.mapper.WeatherMapper
 import com.myweather.data.repository.WeatherRepositoryImpl
 import com.myweather.data.service.WeatherAPI
@@ -22,13 +24,21 @@ object DataModule {
         return OkHttpClient().newBuilder().build()
     }
 
+    private fun presentationModule() : Module {
+        return module {
+            single<ResourceProvider> {
+                ResourceProviderImpl(context = get())
+            }
+        }
+    }
+
     private fun dataModule() : Module {
         return module {
             single<WeatherRepository> {
                 WeatherRepositoryImpl(
                     WeatherRemoteDataSource(
                         service = get(),
-                        mapper = WeatherMapper()
+                        mapper = WeatherMapper(resource = get())
                     )
                 )
             }
@@ -51,6 +61,6 @@ object DataModule {
     }
 
     fun loadModule() {
-        loadKoinModules(dataModule() + serviceModule())
+        loadKoinModules(dataModule() + serviceModule() + presentationModule())
     }
 }

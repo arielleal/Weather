@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.myweather.R
 import com.myweather.core.State
+import com.myweather.core.toTemperature
 import com.myweather.databinding.WeatherMainActivityBinding
 import com.myweather.domain.model.Forecast
 import com.myweather.domain.model.Weather
@@ -41,8 +42,11 @@ class WeatherActivity : AppCompatActivity(R.layout.weather_main_activity) {
     }
 
     private fun handleContent(weather: Weather) = with(binding) {
+        weatherImage.setImageResource(weather.weatherResults.conditionSlug)
         city.text = weather.weatherResults.city
-        temp.text = weather.weatherResults.temp
+        temp.text = weather.weatherResults.temp.toTemperature()
+        description.text = weather.weatherResults.description
+        time.text = weather.weatherResults.time
         setupAdapter(weather.weatherResults.forecastList)
     }
 

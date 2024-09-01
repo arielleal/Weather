@@ -14,7 +14,9 @@ class WeatherViewModel(
     private fun getWeather(request: WeatherRequest) {
         viewModelScope.launch {
             useCase(request)
-                .onStart { showLoading() }
+                .onStart {
+                    showLoading()
+                }
                 .catch {
                     setError(it)
                 }
@@ -26,7 +28,7 @@ class WeatherViewModel(
 
     fun getWeather() {
         getWeather(WeatherRequest(
-            cityName = "Campinas",
+            cityName = "Sorocaba",
             latitude = null,
             longitude = null
         ))

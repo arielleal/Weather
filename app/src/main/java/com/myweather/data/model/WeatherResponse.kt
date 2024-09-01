@@ -14,14 +14,18 @@ data class WeatherResponse(
 data class ResultResponse(
     @Json(name = "temp")
     val temp: Double,
+    @Json(name = "time")
+    val time: String,
     @Json(name = "city")
     val city: String,
+    @Json(name = "description")
+    val description: String,
     @Json(name = "humidity")
     val humidity: Double,
     @Json(name = "wind_speedy")
     val windSpeedy: String,
-    @Json(name = "moon_phase")
-    val moonPhase: String,
+    @Json(name = "condition_slug")
+    val conditionSlug: String,
     @Json(name = "forecast")
     val forecastList: List<ForecastResponse>
 )
