@@ -1,26 +1,14 @@
 package com.myweather.presentation
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.myweather.core.State
+import com.myweather.core.WeatherViewState
 import com.myweather.domain.model.Weather
 
-abstract class WeatherState : ViewModel() {
-
-    private val stateViewModel = MutableLiveData<State>()
-    val state: LiveData<State>
-        get() = stateViewModel
-
-    protected fun setSuccess(result: Weather) {
-        stateViewModel.postValue(State.Loading(visibility = false))
-        stateViewModel.postValue(State.Success(result))
-    }
-
-    protected fun setError(error: Throwable) {
-        stateViewModel.postValue(State.Loading(visibility = false))
-        stateViewModel.postValue(State.Error(error))
-    }
-
-    protected fun showLoading() = stateViewModel.postValue(State.Loading(visibility = true))
+data class WeatherState(
+    val loading: Boolean = false,
+    val result: Weather? = null,
+    val error: Throwable? = null
+) : WeatherViewState {
+    fun showLoading() = copy(loading = true)
+    fun setSuccess(result: Weather) = copy(result = result, loading = false)
+    fun setError() = copy(result = null, loading = false)
 }

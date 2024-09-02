@@ -9,7 +9,12 @@ object PresentationModule {
 
     private fun viewModelModule() : Module {
         return module {
-            factory { WeatherViewModel(useCase = get()) }
+            factory {
+                WeatherViewModel(
+                    weatherUseCase = get(),
+                    storageUseCase = get()
+                )
+            }
         }
     }
 

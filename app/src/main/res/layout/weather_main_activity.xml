@@ -6,15 +6,70 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent" >
 
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="?android:attr/progressBarStyleLarge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/etSearch"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ImageView
+        android:id="@+id/btLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:importantForAccessibility="no"
+        android:src="@drawable/location_icon"
+        android:layout_marginStart="16dp"
+        android:paddingVertical="8dp"
+        android:paddingHorizontal="12dp"
+        android:background="@drawable/weather_location_icon"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <EditText
+        android:id="@+id/etSearch"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="16dp"
+        android:background="@drawable/weather_location_icon"
+        android:padding="16dp"
+        android:hint="@string/weather_editText_hint"
+        app:layout_constraintStart_toEndOf="@+id/btLocation"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btSearch"/>
+
+    <ImageView
+        android:id="@+id/btSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:importantForAccessibility="no"
+        android:src="@drawable/magnifying_icon"
+        android:paddingVertical="12dp"
+        android:paddingHorizontal="12dp"
+        android:background="@drawable/weather_location_icon"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <ImageView
         android:id="@+id/weatherImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:importantForAccessibility="no"
         android:layout_margin="16dp"
         android:layout_marginTop="16dp"
         tools:src="@drawable/clear_day"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/btLocation" />
 
     <TextView
         android:id="@+id/city"
@@ -31,6 +86,18 @@
         app:layout_constraintTop_toTopOf="@+id/weatherImage"
         app:layout_constraintWidth_default="wrap"
         tools:text="Hortolandia" />
+
+    <TextView
+        android:id="@+id/description"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/city"
+        tools:text="Parcialmente nublado" />
 
     <TextView
         android:id="@+id/time"
@@ -58,18 +125,6 @@
         app:layout_constraintTop_toBottomOf="@id/weatherImage"
         tools:text="22" />
 
-    <TextView
-        android:id="@+id/description"
-        style="@style/TextAppearance.AppCompat.Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/city"
-        tools:text="Parcialmente nublado" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvList"
         android:layout_width="0dp"
@@ -82,5 +137,13 @@
         app:layout_constraintTop_toBottomOf="@+id/time"
         tools:itemCount="3"
         tools:listitem="@layout/weather_item_list" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/loadingGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:constraint_referenced_ids="rvList, temp, description, time, city, weatherImage"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

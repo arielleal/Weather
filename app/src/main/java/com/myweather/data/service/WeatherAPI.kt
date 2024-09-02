@@ -10,7 +10,7 @@ interface WeatherAPI {
     suspend fun getWeather(
         @Query("key") key: String,
         @Query("city_name") cityName: String?,
-        @Query("lat") latitude: String?,
-        @Query("lon") longitude: String?
+        @Query("lat") latitude: Float?,
+        @Query("lon") longitude: Float?
     ): WeatherResponse
 }

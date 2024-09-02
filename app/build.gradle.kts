@@ -80,6 +80,9 @@ dependencies {
     implementation (libs.retrofit)
     implementation (libs.converter.gson)
 
+    //location
+    implementation (libs.play.services.location)
+
     //test
     testImplementation(libs.junit)
     testImplementation(libs.testng)

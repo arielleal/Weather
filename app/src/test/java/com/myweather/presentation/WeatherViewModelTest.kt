@@ -2,7 +2,7 @@ package com.myweather.presentation
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.myweather.core.State
+import com.myweather.domain.usecase.StorageSearchUseCase
 import com.myweather.domain.usecase.WeatherUseCase
 import com.myweather.util.MainDispatcherRule
 import com.myweather.util.weatherResponseStub
@@ -24,15 +24,17 @@ class WeatherViewModelTest {
     @get:Rule
     var mainDispatcherRule = MainDispatcherRule()
 
-    private var stateObserver: Observer<State> = mockk(relaxed = true)
+    private var stateObserver: Observer<WeatherState> = mockk(relaxed = true)
 
     private lateinit var viewModel: WeatherViewModel
-    private val useCase: WeatherUseCase = mockk()
+    private val weatherUseCase: WeatherUseCase = mockk()
+    private val storageUseCase: StorageSearchUseCase = mockk(relaxed = true)
 
     @Before
     fun setup() {
         viewModel = WeatherViewModel(
-            useCase = useCase
+            weatherUseCase = weatherUseCase,
+            storageUseCase =storageUseCase
         )
         viewModel.state.observeForever(stateObserver)
     }
@@ -41,16 +43,23 @@ class WeatherViewModelTest {
     fun `GetWeather should return success state when useCase return correctly response`() = runBlocking {
         // Given
         val response = weatherResponseStub()
-        every { useCase(any()) } returns flowOf(response)
+        val cityName = "Hotolandia"
+
+        val initialState = WeatherState()
+        val loadingState = initialState.showLoading()
+        val successState = loadingState.setSuccess(result = response)
+
+        every { weatherUseCase(any()) } returns flowOf(response)
+        viewModel.updateCityName(cityName)
 
         //When
         viewModel.getWeather()
 
         //Then
         verifyOrder {
-            stateObserver.onChanged(State.Loading(true))
-            stateObserver.onChanged(State.Loading(false))
-            stateObserver.onChanged(State.Success(response))
+            stateObserver.onChanged(initialState)
+            stateObserver.onChanged(loadingState)
+            stateObserver.onChanged(successState)
         }
     }
 
@@ -58,16 +67,23 @@ class WeatherViewModelTest {
     fun `GetWeather should return error state when useCase return exception`() = runBlocking {
         // Given
         val error = Throwable()
-        every { useCase(any()) } returns flow { throw error}
+        val cityName = "Hotolandia"
+
+        val initialState = WeatherState()
+        val loadingState = initialState.showLoading()
+        val errorState = loadingState.setError()
+
+        every { weatherUseCase(any()) } returns flow { throw error }
+        viewModel.updateCityName(cityName)
 
         //When
         viewModel.getWeather()
 
         //Then
         verifyOrder {
-            stateObserver.onChanged(State.Loading(true))
-            stateObserver.onChanged(State.Loading(false))
-            stateObserver.onChanged(State.Error(error))
+            stateObserver.onChanged(initialState)
+            stateObserver.onChanged(loadingState)
+            stateObserver.onChanged(errorState)
         }
     }
 }
