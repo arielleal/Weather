@@ -11,6 +11,7 @@ O **Weather App** é um aplicativo que fornece previsões meteorológicas em tem
 - Consulta de previsão do tempo atual e futura por localização atual.
 - Busca por localização usando nome da cidade.
 - Exibição de informações de tempo para os próximos dias.
+- Guarda a ultima cidade pesquisada.
 - Interface amigável.
 
 ## Tecnologias Utilizadas
@@ -20,6 +21,8 @@ O **Weather App** é um aplicativo que fornece previsões meteorológicas em tem
 - Retrofit
 - Mockk
 - Coroutines
+- SharedPreferences
+  
 - **API:** HG Weather - https://console.hgbrasil.com/documentation/weather
 
 ## Arquitetura utilizada
