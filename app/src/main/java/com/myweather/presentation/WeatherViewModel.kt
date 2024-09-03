@@ -3,13 +3,12 @@ package com.myweather.presentation
 import androidx.lifecycle.viewModelScope
 import com.myweather.core.ViewModelState
 import com.myweather.data.model.WeatherRequest
+import com.myweather.domain.model.Weather
 import com.myweather.domain.usecase.StorageSearchUseCase
 import com.myweather.domain.usecase.WeatherUseCase
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
-
-private const val CITY_KEY = "city"
 
 class WeatherViewModel(
     private val weatherUseCase: WeatherUseCase,
@@ -17,6 +16,16 @@ class WeatherViewModel(
 ) : ViewModelState<WeatherState>(WeatherState()) {
 
     private var _cityName: String? = null
+
+    fun getWeather() {
+        if (_cityName.isNullOrEmpty().not()) {
+            getWeather(
+                WeatherRequest(
+                    cityName = _cityName
+                )
+            )
+        }
+    }
 
     private fun getWeather(request: WeatherRequest) {
         viewModelScope.launch {
@@ -27,34 +36,26 @@ class WeatherViewModel(
                 .catch {
                     setState { state -> state.setError() }
                 }
-                .collect {
-                    setState { state -> state.setSuccess(it) }
-                }
+                .collect(::handleSuccess)
         }
+    }
+
+    private fun handleSuccess(result: Weather) {
+        updateStorage(result.weatherResults.city)
+        setState { state -> state.setSuccess(result) }
     }
 
     fun updateCityName(cityName: String?) {
         _cityName = cityName
     }
 
-    fun getWeather() {
-        if (_cityName.isNullOrEmpty().not()) {
-            updateStorage(_cityName!!)
-            getWeather(
-                WeatherRequest(
-                    cityName = _cityName
-                )
-            )
-        }
-    }
-
     fun getStorage() {
-        _cityName = storageUseCase.get(CITY_KEY)
+        _cityName = storageUseCase.get()
         getWeather()
     }
 
     private fun updateStorage(cityName: String) {
-        storageUseCase.set(CITY_KEY, cityName)
+        storageUseCase.set(cityName)
     }
 
     fun setLocation(longitude: Double, latitude: Double) {

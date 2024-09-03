@@ -5,6 +5,6 @@ import com.myweather.domain.repository.StoredSearchRepository
 class StorageSearchUseCase(
     private val repository: StoredSearchRepository
 ) {
-    fun get(key: String): String? = repository.get(key)
-    fun set(key: String, value: String) = repository.set(key, value)
+    fun get(): String? = repository.get()
+    fun set(cityName: String) = repository.set(cityName)
 }

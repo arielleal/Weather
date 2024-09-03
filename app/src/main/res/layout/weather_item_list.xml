@@ -27,6 +27,7 @@
                 android:layout_height="65dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginVertical="20dp"
+                android:importantForAccessibility="no"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -76,7 +77,7 @@
                 android:layout_marginBottom="4dp"
                 app:layout_constraintEnd_toStartOf="@id/maxValue"
                 app:layout_constraintBottom_toBottomOf="@+id/maxValue"
-                android:text="Max" />
+                android:text="@string/weather_max_temperature_list_item" />
 
             <TextView
                 android:id="@+id/minDescription"
@@ -87,7 +88,7 @@
                 android:layout_marginBottom="4dp"
                 app:layout_constraintBottom_toBottomOf="@+id/minValue"
                 app:layout_constraintEnd_toStartOf="@id/minValue"
-                android:text="Min" />
+                android:text="@string/weather_min_temperature_list_item" />
 
             <TextView
                 android:id="@+id/maxValue"
@@ -112,6 +113,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/maxValue"
                 tools:text="15" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

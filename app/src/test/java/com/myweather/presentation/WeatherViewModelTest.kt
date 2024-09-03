@@ -40,7 +40,7 @@ class WeatherViewModelTest {
     }
 
     @Test
-    fun `GetWeather should return success state when useCase return correctly response`() = runBlocking {
+    fun `getWeather should return success state when useCase return correctly response`() = runBlocking {
         // Given
         val response = weatherResponseStub()
         val cityName = "Hotolandia"
@@ -64,7 +64,30 @@ class WeatherViewModelTest {
     }
 
     @Test
-    fun `GetWeather should return error state when useCase return exception`() = runBlocking {
+    fun `setLocation should return success state when useCase return correctly response`() = runBlocking {
+        // Given
+        val response = weatherResponseStub()
+        val cityName = "Hotolandia"
+
+        val initialState = WeatherState()
+        val loadingState = initialState.showLoading()
+        val successState = loadingState.setSuccess(result = response)
+
+        every { weatherUseCase(any()) } returns flowOf(response)
+
+        //When
+        viewModel.setLocation(0.0, 0.0)
+
+        //Then
+        verifyOrder {
+            stateObserver.onChanged(initialState)
+            stateObserver.onChanged(loadingState)
+            stateObserver.onChanged(successState)
+        }
+    }
+
+    @Test
+    fun `getWeather should return error state when useCase return exception`() = runBlocking {
         // Given
         val error = Throwable()
         val cityName = "Hotolandia"
@@ -78,6 +101,29 @@ class WeatherViewModelTest {
 
         //When
         viewModel.getWeather()
+
+        //Then
+        verifyOrder {
+            stateObserver.onChanged(initialState)
+            stateObserver.onChanged(loadingState)
+            stateObserver.onChanged(errorState)
+        }
+    }
+
+    @Test
+    fun `setLocation should return error state when useCase return exception`() = runBlocking {
+        // Given
+        val error = Throwable()
+        val cityName = "Hotolandia"
+
+        val initialState = WeatherState()
+        val loadingState = initialState.showLoading()
+        val errorState = loadingState.setError()
+
+        every { weatherUseCase(any()) } returns flow { throw error }
+
+        //When
+        viewModel.setLocation(0.0, 0.0)
 
         //Then
         verifyOrder {

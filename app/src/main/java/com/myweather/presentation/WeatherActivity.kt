@@ -38,10 +38,12 @@ class WeatherActivity : AppCompatActivity(R.layout.weather_main_activity) {
     }
 
     private fun stateObserver() {
-        viewModel.state.observe(this, Observer { state ->
-            showLoading(loadingIsVisible = state.loading)
-            state.result?.let { handleContent(weather = it) }
-        })
+        viewModel.state.observe(this, Observer
+            { state ->
+                showLoading(loadingIsVisible = state.loading)
+                state.result?.let { handleContent(weather = it) }
+            }
+        )
     }
 
     private fun showLoading(loadingIsVisible: Boolean) = with(binding){
@@ -89,5 +91,3 @@ class WeatherActivity : AppCompatActivity(R.layout.weather_main_activity) {
         )
     }
 }
-
-// TODO Criar view de erro e controlar estado

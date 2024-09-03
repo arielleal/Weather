@@ -6,6 +6,6 @@ import com.myweather.domain.repository.StoredSearchRepository
 class StoredSearchRepositoryImpl(
     private val storedSearchLocalDataSource: StoredSearchLocalDataSource
 ) : StoredSearchRepository {
-    override fun get(key: String): String? = storedSearchLocalDataSource.get(key)
-    override fun set(key: String, value: String) = storedSearchLocalDataSource.set(key, value)
+    override fun get(): String? = storedSearchLocalDataSource.get()
+    override fun set(cityName: String) = storedSearchLocalDataSource.set(cityName)
 }

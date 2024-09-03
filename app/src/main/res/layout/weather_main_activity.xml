@@ -144,6 +144,11 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         tools:visibility="visible"
-        app:constraint_referenced_ids="rvList, temp, description, time, city, weatherImage"/>
+        app:constraint_referenced_ids="rvList,
+        temp,
+        description,
+        time,
+        city,
+        weatherImage"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
