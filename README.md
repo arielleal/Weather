@@ -31,4 +31,5 @@ A arquitetura utilizada para esse projeto foi Clean Architecture + MVVM, para um
 - Criação de uma MainActivity;
 - Criar ícone/splash screen;
 - Tratamento de erro mais informativo;
-- Adição de mais testes untiários e instrumentados.
+- Adição de testes de integração(Repository).
+- Adição de testes instrumentados(Espresso).
