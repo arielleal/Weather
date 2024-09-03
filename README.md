@@ -1,5 +1,7 @@
 # Weather App
 
+![Screen_Recording_20240902_213238_MyWeather-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/8b81df75-9a5c-4478-b1c4-8101adb1d355)
+
 ## Descrição
 
 O **Weather App** é um aplicativo que fornece previsões meteorológicas em tempo real. Através de uma interface simples e intuitiva, você pode consultar a temperatura da cidade que você desejar.
@@ -31,5 +33,6 @@ A arquitetura utilizada para esse projeto foi Clean Architecture + MVVM, para um
 - Criação de uma MainActivity;
 - Criar ícone/splash screen;
 - Tratamento de erro mais informativo;
-- Adição de testes de integração(Repository).
+- Acessibilidade;
+- Adição de testes de integração(Repository);
 - Adição de testes instrumentados(Espresso).
